@@ -3,14 +3,18 @@
         <remap from="odom" to="/turtlebot/kobuki/odom_ground_truth"/>
     </node>
 
-    <node pkg="pick_up_objects_task" type="turtlebot_controller_node.py" name="robot_base_controller" output="screen">
+    <node pkg="pick_up_objects_task" type="turtlebot_online_path_planning_node.py" name="turtlebot_online_path_planning_controller" output="screen">
+    </node>
+
+    <!-- <node pkg="pick_up_objects_task" type="turtlebot_controller_node.py" name="robot_base_controller" output="screen">
         <remap from="odom" to="/turtlebot/kobuki/odom_ground_truth"/>
         <remap from="cmd_vel" to="/turtlebot/kobuki/commands/velocity"/>
-    </node>
+    </node> -->
 
     <node pkg="pick_up_objects_task" type="pickup_behaviors_node.py" name="pick_objects" output="screen"/>
 
-    <!--node ENABLE THE MOTION PLANNING NODE YOU CREATED IN THE PREVIOUS LAB -->
+    <!--node ENABLE THE MOTION PLANNING NODE YOU CREATED IN THE PREVIOUS LAB -->    
+
 </launch>
 
     

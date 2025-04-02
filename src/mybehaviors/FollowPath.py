@@ -4,6 +4,8 @@ from nav_msgs.msg import Path,Odometry
 import numpy as np
 import tf
 import py_trees
+from visualization_msgs.msg import Marker
+
 
 # Behavior for path following
 class FollowPath(py_trees.behaviour.Behaviour):
@@ -17,7 +19,7 @@ class FollowPath(py_trees.behaviour.Behaviour):
 
     def setup(self):
         self.logger.debug("  %s [FollowPath::setup()]" % self.name)
-        # self.pathPub=rospy.Publisher("/move_base_simple/goal",PoseStamped,queue_size=1)
+        self.pathPub=rospy.Publisher("/move_base_simple/goal",PoseStamped,queue_size=1) ####### TODO should this be uncommented? 
 
     def initialise(self):
         self.logger.debug("  %s [FollowPath::initialise()]" % self.name)
@@ -63,14 +65,17 @@ class Controller:
         # Parameters
         self.Kv = 0.5  # Proportional linear velocity controller
         self.Kw = 0.5  # Proportional angular velocity controller
-        self.v_max = 0.15  # Maximum linear velocity control action
+        self.v_max = 0.15  # Maximum linear velocity control action ##################### CHANGE THIS? #####################
         self.w_max = 0.3  # Maximum angular velocity control action
 
         # Publishers
         self.cmd_pub = rospy.Publisher(cmd_vel_topic, Twist, queue_size=1)
+        self.marker_pub = rospy.Publisher('~path_marker', Marker, queue_size=1)
+        
         # Subscribers
         self.odom_sub = rospy.Subscriber(odom_topic, Odometry, self.get_odom)
-        
+        self.move_goal_sub = rospy.Subscriber('/move_base_simple/goal', PoseStamped, self.get_goal)
+
 
         # Wrap angle between -pi and pi
     def wrap_angle(self,angle):

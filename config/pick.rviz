@@ -9,6 +9,7 @@ Panels:
         - /TF1/Frames1
         - /Odometry1/Shape1
         - /Path1
+        - /Marker1
       Splitter Ratio: 0.4816112220287323
     Tree Height: 797
   - Class: rviz/Selection
@@ -479,6 +480,14 @@ Visualization Manager:
       Topic: /turtlebot/planned_path
       Unreliable: false
       Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /turtlebot_online_path_planning/path_marker
+      Name: Marker
+      Namespaces:
+        path: true
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -507,7 +516,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 10.440736770629883
+      Distance: 5.904252052307129
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -515,17 +524,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 1.8564151525497437
-        Y: 0.9962513446807861
-        Z: 1.3430448770523071
+        X: 2.098665237426758
+        Y: 1.3212099075317383
+        Z: 0.8790056705474854
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: true
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.5697963237762451
+      Pitch: 1.399796485900879
       Target Frame: <Fixed Frame>
-      Yaw: 1.57676362991333
+      Yaw: 1.5867642164230347
     Saved: ~
 Window Geometry:
   Displays:

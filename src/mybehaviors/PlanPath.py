@@ -14,10 +14,19 @@ class PlanPath(py_trees.behaviour.Behaviour):
         # planner class object
         self.planner=Planner()
         self.waypoints=[]
+        
+        # For map data
+        self.map_data = None
+        self.map_resolution = None
+        self.map_origin = None
+        self.map_initialized = False
 
     def setup(self):
         self.logger.debug("  %s [PlanPath::setup()]" % self.name)
         self.pathPub=rospy.Publisher("/turtlebot/planned_path",Path,queue_size=1,latch=True)
+
+    # Subscribe to map topic (adjust topic name as needed)
+    # rospy.Subscriber("/map", OccupancyGrid, self.map_callback)
 
     def initialise(self):
         self.logger.debug("  %s [PlanPath::initialise()]" % self.name)
@@ -67,3 +76,4 @@ class Planner:
         # self.path.poses.append(goal)
         
         return self.path
+
