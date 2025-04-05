@@ -90,7 +90,7 @@ class Controller:
                 np.linalg.norm(self.path[0] - self.current_pose[0:2])
                 < self.distance_threshold
             ):
-                print("Position {} reached".format(self.path[0]))
+                # print("Position {} reached".format(self.path[0]))
                 del self.path[0]
                 if len(self.path) == 0:
                     self.goal = None

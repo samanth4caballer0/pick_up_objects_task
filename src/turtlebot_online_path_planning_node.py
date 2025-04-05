@@ -86,8 +86,9 @@ class OnlinePlanner:
     # Goal callback: Get new goal from /move_base_simple/goal topic published by rviz 
     # and computes a plan to it using self.plan() method
     def get_goal(self, goal):
+        rospy.logwarn("New goal received")
         if self.svc.there_is_map:
-
+            rospy.logwarn("New goal received yes")
             x = goal.pose.position.x
             y = goal.pose.position.y
             self.goal = np.array([x,y])
@@ -130,11 +131,11 @@ class OnlinePlanner:
 
                 if not self.svc.check_path(total_path):
                     rospy.logerr("Current path is not valid -- plan a new path")
-                    if self.svc.is_valid(self.goal):
-                        self.path = []
-                        self.plan()
-                    else:
-                        rospy.logerr("Current goal is stucked in obstacle")
+                    # if self.svc.is_valid(self.goal):
+                    self.path = []
+                    self.plan()
+                    # else:
+                    #     rospy.logerr("Current goal is stucked in obstacle")
                 else:
                     rospy.logwarn("Current path is valid -- stay on same path")
 
@@ -191,7 +192,7 @@ class OnlinePlanner:
                     rospy.loginfo("Waypoint reached --> Move to the next waypoint")
                 else: 
                     v,w = move_to_point(self.current_pose,self.path[0],self.Kv,self.Kw)
-                    rospy.loginfo("v: %f, w: %f", v, w)
+                    # rospy.loginfo("v: %f, w: %f", v, w)
 
             else:
                 #rospy.logwarn("Path is empty")
@@ -310,13 +311,13 @@ class OnlinePlanner:
 
 
     def is_stuck_in_obst(self):
-        print(self.current_pose[0:2])
+        # print(self.current_pose[0:2])
         return not self.svc.is_valid(self.current_pose[0:2])
             
 # MAIN FUNCTION
 if __name__ == '__main__':
     rospy.init_node('turtlebot_online_path_planning_node')   
-    node = OnlinePlanner('/projected_map', '/turtlebot/kobuki/odom_ground_truth', '/turtlebot/kobuki/commands/velocity', np.array([-10.0, 10.0, -10.0, 10.0]), 0.20)#0.18)
+    node = OnlinePlanner('/projected_map', '/turtlebot/kobuki/odom_ground_truth', '/turtlebot/kobuki/commands/velocity', np.array([-10.0, 10.0, -10.0, 10.0]), 0.18)#0.18)
     rospy.logwarn("STARTING ONLINE PLANNIG NODE")
     # Run forever
     rospy.spin()

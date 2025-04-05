@@ -45,7 +45,7 @@ class ManageObject:
                 + str(round(distance, 2))
                 + " meters"
             )
-            if distance < 0.35:
+            if distance < 0.43:
                 print("able to pick: " + ball)
                 ret.success = True
                 ret.message = ball
@@ -71,7 +71,7 @@ class ManageObject:
                 + str(round(distance, 2))
                 + " meters"
             )
-            if distance < 0.35:
+            if distance < 0.43:
                 print("picking up: " + ball)
                 attachSrv = rospy.ServiceProxy(
                     "/turtlebot/stonefish_simulator/attach/" + ball, SetBool
