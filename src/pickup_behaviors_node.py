@@ -163,7 +163,7 @@ class TurnTowardsBall(py_trees.behaviour.Behaviour):
         
         # Ball positions
         self.ball_positions = [
-            [1.4, 0.7],    # Ball 1
+            [1.4, 0.7],   # Ball 1
             [0.7, 2.5],   # Ball 2 
             [2.4, 3.15]   # Ball 3
         ]
@@ -270,13 +270,15 @@ if __name__ == "__main__":
     
     behavior_tree = py_trees.trees.BehaviourTree(root=root)
     # call setup method of all tree behaviors
-    behavior_tree.setup(timeout=15)
+    # behavior_tree.setup(timeout=15)
 
  
     # save tree as image
     rospack = rospkg.RosPack()
     filepath = rospack.get_path("pick_up_objects_task")
-    py_trees.display.render_dot_tree(root)
+    output_path = filepath + "/tree.png"  # Specify filename with extension
+
+    py_trees.display.render_dot_tree(root,target_directory=filepath)
 
     # manual path because im lazy but you are not (O__O)
     # plan_path.waypoints=[[3.0,-0.78],[3.0,0.7],[1.5,0.7]]
